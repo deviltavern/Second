@@ -46,15 +46,13 @@ public class Bag : MonoBehaviour {
 		for (int i = 0; i < 4; i++) {
 		
 			for (int j = 0; j < 4; j++) {
-				string id = i+"-"+j+"-";
+				string id = i+"-"+j+"-";//id为背包框的id
 				GameObject g =  GameObject.Instantiate (ResourcesManager.prefabDic[ResName.bagItem],this.transform);
-				g.GetComponent<RectTransform> ().localPosition = initPos+new Vector2(+i*110,-j*110);
-                
-                
+				g.GetComponent<RectTransform> ().localPosition = initPos+new Vector2(+j*110,-i*110);//改为先生成行，再生成列
                 BagItem item = g.GetComponent<BagItem>();
                 item.bagItemID = id;
-	   
-
+	            
+               
 				bagItemDic.Add (id, g);
 			}
 		

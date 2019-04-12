@@ -11,6 +11,12 @@ public class ResourcesManager : MonoBehaviour {
 
         load(ResName.bagItem);
         load(ResName.lred);
+        load(ResName.lblue);
+        load(ResName.lyellow);
+        load(ResName.cloth);
+        load(ResName.helmet);
+        load(ResName.sword);
+
      }
 
 
