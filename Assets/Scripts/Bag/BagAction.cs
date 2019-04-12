@@ -48,7 +48,7 @@ public class BagAction : MonoBehaviour {
 
                 if (bagItem.itemID == null)
                 {
-                    Debug.Log(bagItem.itemID);
+                    //Debug.Log(bagItem.itemID);
                   
                     bagItem.itemID = item.resID;
                     bagItem.addItem(item);
