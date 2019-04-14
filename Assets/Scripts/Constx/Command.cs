@@ -4,12 +4,12 @@
 public class Command {
 
 
-    public const string moveLeft = "SYSTEM CALL MOVE LEFT";
-    public const string mvoeRight = "SYSTEM CALL MOVE RIGHT";
+    public const string moveLeft =  "MOVE LEFT";
+    public const string mvoeRight = "MOVE RIGHT";
 
-    public const string moveFront = "SYSTEM CALL MOVE FRONT";
+    public const string moveFront = "MOVE FRONT";
 
-    public const string moveBack = "SYSTEM CALL MOVE BACK";
+    public const string moveBack =  "MOVE BACK";
 
 
 

@@ -10,7 +10,7 @@ public class TestX : StrategySponsor
     {
 
     }
-
+    
     // Update is called once per frame
     void Update()
     {
@@ -18,7 +18,7 @@ public class TestX : StrategySponsor
         if (Input.GetKeyDown(KeyCode.M))
         {
 
-           // LocalMoveManager.Instance.strategy = new MoveStrategy(LocalPlayer.player.gameObject, Command.moveLeft, LocalMoveManager.Instance);
+            //LocalMoveManager.Instance.strategy = new MoveStrategy(LocalPlayer.player.gameObject, Command.moveLeft, LocalMoveManager.Instance);
 
 
         }

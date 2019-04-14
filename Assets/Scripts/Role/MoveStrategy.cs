@@ -27,7 +27,7 @@ public class MoveStrategy : Strategy
     {
 
         // player.transform.position;
-        // Debug.Log(command);
+         Debug.Log(command);
         switch (command)
         {
             case Command.moveLeft:
@@ -36,7 +36,7 @@ public class MoveStrategy : Strategy
                 break;
                 
             case Command.mvoeRight:
-
+                Debug.Log("123333333333333333");
                 player.transform.position -= new Vector3(-2, 0, 0);
                 break;
                 
@@ -54,9 +54,9 @@ public class MoveStrategy : Strategy
 
                 break;
         }
-     
-        this.sponsor.strategy = null;
 
+         this.sponsor.strategy = null;
+       // LocalMoveManager.Instance.strategy = null;
 
     }
 }

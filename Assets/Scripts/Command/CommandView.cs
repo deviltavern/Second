@@ -1,12 +1,14 @@
-﻿using UnityEngine;
-using UnityEditor;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
-using System;
+
+
 
 public class CommandView : MonoBehaviour
 {
     public static CommandView Instance;
-
+    List<string> contentList = new List<string>();
 
     public Text textView;
     public RectTransform content;
@@ -22,26 +24,76 @@ public class CommandView : MonoBehaviour
 
     public void setCommand(string value)
     {
-        textView.text += "系统命令：" + value + "\n";
+        textView.text += "System call：" + value + "\n";
+
+    }
+
+    public void setCommandWithoutPrefix(string value)
+    {
+        textView.text +=  value + "\n";
+
+    }
+
+
+    string tempStr;
+    
+    public void setDynamicData(string value)
+    {
+        textView.text = value;
 
     }
     bool allowWriteCommand;
-
+    string tep2 = "";
+    string tep3 = "";
     public string dynamicStr = "";
+
+    
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Return))
+
+       
+        tempStr = "";
+        tep3 = "";
+        foreach (string key in contentList)
         {
-            allowWriteCommand = true;
+            Debug.Log(contentList.Count);
+            tempStr += key;
+
+         
         }
+
+
+        if (allowWriteCommand == false)
+        {
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+
+
+                tep2 = "System call：";
+
+
+
+                allowWriteCommand = true;
+
+
+
+
+
+
+            }
+        }
+        
 
 
         if (allowWriteCommand == true)
         {
 
+          
+
+
             if (Input.anyKeyDown)
             {
-                foreach (KeyCode keyCode in Enum.GetValues(typeof(KeyCode)))
+                foreach (KeyCode keyCode in System.Enum.GetValues(typeof(KeyCode)))
                 {
                     if (Input.GetKeyDown(keyCode)&& keyCode != KeyCode.Return && keyCode != KeyCode.CapsLock )
                     {
@@ -49,6 +101,7 @@ public class CommandView : MonoBehaviour
                         if (keyCode == KeyCode.Space)
                         {
                             dynamicStr += " ";
+                           
                             continue;
                         }
                         
@@ -56,23 +109,31 @@ public class CommandView : MonoBehaviour
                     }
                 }
             }
-
+            
             if (Input.GetKeyDown(KeyCode.Return)&& dynamicStr != "")
             {
 
                 Debug.Log("命令键入完毕");
-                setCommand(dynamicStr);
 
+
+               // setDynamicData();
 
                 LocalMoveManager.Instance.strategy = new MoveStrategy(LocalPlayer.player.gameObject, dynamicStr, LocalMoveManager.Instance);
 
+                contentList.Add(tep2 + dynamicStr + "\n");
+                
+               
 
-
+                contentList.Add("System do:    " + dynamicStr + "\n");
+                tep2 = "";
                 dynamicStr = "";
                 allowWriteCommand = false;
             }
 
         }
+
+
+        textView.text = tempStr + tep2 + dynamicStr;
     }
 
 
