@@ -24,7 +24,9 @@ public class CommandView : MonoBehaviour
 
     public void setCommand(string value)
     {
-        textView.text += "System call：" + value + "\n";
+
+        contentList.Add("System call: "+value+"\n");
+        contentList.Add("System do:    " + value + "\n");
 
     }
 
@@ -56,7 +58,7 @@ public class CommandView : MonoBehaviour
         tep3 = "";
         foreach (string key in contentList)
         {
-            Debug.Log(contentList.Count);
+
             tempStr += key;
 
          
@@ -120,8 +122,11 @@ public class CommandView : MonoBehaviour
 
                 LocalMoveManager.Instance.strategy = new MoveStrategy(LocalPlayer.player.gameObject, dynamicStr, LocalMoveManager.Instance);
 
-                contentList.Add(tep2 + dynamicStr + "\n");
-                
+                //SkillReleaseManager.Instance.touch(LocalPlayer.player.gameObject);
+
+               // contentList.Add(tep2 + dynamicStr + "\n");
+                content.localPosition += new Vector3(0, 15);
+               
                
 
                 contentList.Add("System do:    " + dynamicStr + "\n");

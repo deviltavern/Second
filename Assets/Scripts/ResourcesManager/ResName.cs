@@ -10,8 +10,10 @@ public class ResName : MonoBehaviour {
     public const string cloth = "cloth";
     public const string helmet = "helmet";
     public const string sword = "sword";
-    
 
+    public const string ef1 = "ef1";
+
+    public const string ef2 = "ef2";
 
 
     public const string fireBall = "fireBall";

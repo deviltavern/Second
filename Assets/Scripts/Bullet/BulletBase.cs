@@ -7,6 +7,11 @@ public class BulletBase : MonoBehaviour,IOBViewer {
     public Strategy strategy { get; set; }
     private List<IViewer> viewList = new List<IViewer>();
     public string resID { get; set; }
+
+    public virtual void Awake()
+    {
+        addViewer(SkillReleaseManager.Instance);
+    }
     public void addViewer(IViewer viewer)
     {
         viewList.Add(viewer);
@@ -54,8 +59,12 @@ public class BulletBase : MonoBehaviour,IOBViewer {
         switch (co.tag)
         {
             case "Player":
-
-                Destroy(co.gameObject);
+                ViewInfo info = new ViewInfo();
+                info.arg1 = co.GetComponent<Player>().ID;
+                info.aimG = co.gameObject;
+                info.code = 1;
+                broadCast(info);
+                Destroy(this.gameObject);
 
 
                 break;

@@ -10,6 +10,7 @@ public class MoveStrategy : Strategy
         this.player = aimG;
         this.command = _command;
         this.sponsor = _sponsor;
+        initPosition = player.transform.position;
 
     }
 
@@ -21,41 +22,79 @@ public class MoveStrategy : Strategy
     int code;
 
 
+    Vector3 dir;
+    float distance;
 
-
+    Vector3 initPosition;
     public override void doSomething()
     {
 
         // player.transform.position;
          Debug.Log(command);
-        switch (command)
+
+        switch (code)
         {
-            case Command.moveLeft:
+            case 0:
 
-                player.transform.position -= new Vector3(2, 0, 0);
+                //初始化移动位置
+                switch (command)
+                {
+                    case Command.moveLeft:
+                        dir -= new Vector3(2, 0, 0);
+                        break;
+
+                    case Command.mvoeRight:
+                        Debug.Log("123333333333333333");
+                       dir -= new Vector3(-2, 0, 0);
+                        break;
+
+                    case Command.moveFront:
+
+                       dir -= new Vector3(0, 0, -2);
+                        break;
+
+                    case Command.moveBack:
+
+                       dir -= new Vector3(0, 0, 2);
+                        break;
+
+                    case Command.touch:
+
+                        SkillReleaseManager.Instance.touch(player);
+                        Debug.Log("执行touch事件！");
+                        break;
+
+                    default:
+
+                        break;
+                }
+
+                code++;
                 break;
+
+            case 1:
+
+                dir = Vector3.Normalize(dir);
+                player.transform.position += dir * Time.deltaTime * 10;
+
+
+                distance = Vector3.Distance(initPosition, player.transform.position);
+
+                if (distance > 2)
+                {
+                    code++;
+                }
                 
-            case Command.mvoeRight:
-                Debug.Log("123333333333333333");
-                player.transform.position -= new Vector3(-2, 0, 0);
-                break;
-                
-            case Command.moveFront:
-
-                player.transform.position -= new Vector3(0, 0, -2);
-                break;
-                
-            case Command.moveBack:
-
-                player.transform.position -= new Vector3(0, 0, 2);
                 break;
 
-            default:
 
+            case 2:
+                this.sponsor.strategy = null;
                 break;
         }
+       
 
-         this.sponsor.strategy = null;
+        
        // LocalMoveManager.Instance.strategy = null;
 
     }
