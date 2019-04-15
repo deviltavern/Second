@@ -5,7 +5,7 @@ using UnityEngine;
 public class SkillSettleMent : MonoBehaviour, IViewer
 {
 
-
+    //技能结算
 
 
     public void updateViewInfo(ViewInfo info)

@@ -6,7 +6,7 @@ public abstract class Role : MonoBehaviour {
 
     public static Role Player;
 
-    public string  ID{ get; set; }
+    public string ID;
     public int hp { get; set; }
     public int mp { get; set; }
     public int moveSpeed { get; set; }

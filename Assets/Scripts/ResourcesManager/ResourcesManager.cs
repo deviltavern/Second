@@ -17,6 +17,7 @@ public class ResourcesManager : MonoBehaviour {
         load(ResName.helmet);
         load(ResName.sword);
 
+        load(ResName.lables);
         load(ResName.ef1);
         load(ResName.ef2);
     }

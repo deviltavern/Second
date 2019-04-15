@@ -14,7 +14,7 @@ public class ResName : MonoBehaviour {
     public const string ef1 = "ef1";
 
     public const string ef2 = "ef2";
-
+    public const string lables = "labels";
 
     public const string fireBall = "fireBall";
 }

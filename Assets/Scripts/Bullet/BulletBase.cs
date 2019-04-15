@@ -5,7 +5,7 @@ using UnityEngine;
 public class BulletBase : MonoBehaviour,IOBViewer {
 
     public Strategy strategy { get; set; }
-    private List<IViewer> viewList = new List<IViewer>();
+    private List<IViewer> viewList = new List<IViewer>();//观察者列表
     public string resID { get; set; }
 
     public virtual void Awake()

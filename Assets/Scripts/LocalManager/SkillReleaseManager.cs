@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SkillReleaseManager : StrategySponsor,IViewer
 {
@@ -10,15 +11,16 @@ public class SkillReleaseManager : StrategySponsor,IViewer
     private void Awake()
     {
         Instance = this;
-        touchSphere = GameObject.Find("touchSphere");
+        touchSphere = GameObject.Find("touchSphere");//找到碰撞球
         touchSphere.SetActive(false);
-        offset = 3.1f;
+    //   offset = 3.1f;
+       
     }
 
     bool touchEvent = false;
 
     Vector3 touchPointVec;
-    public float offset;
+ //   public float offset;
     public void touch(GameObject touchPoint)
     {
 
@@ -32,11 +34,12 @@ public class SkillReleaseManager : StrategySponsor,IViewer
         
         foreach (GameObject g in playerList)
         {
+            //材质球的组件MeshRenderer，变为白色
             g.GetComponent<MeshRenderer>().material.color = Color.white;
 
         }
         playerList.Clear();
-
+           //   *Collider碰撞器，ExplosionDamage将碰撞到的tag=Player加入List
         ExplosionDamage(touchPointVec, 10);
 
         foreach (GameObject g in playerList)
@@ -57,7 +60,7 @@ public class SkillReleaseManager : StrategySponsor,IViewer
         TouchBullet g = TouchBullet.insBulletItem<TouchBullet>(ResName.ef1);
 
         g.transform.position = player.transform.position;
-        Vector3 dir2 = Vector3.Normalize(aimG.transform.position - g.transform.position);
+        Vector3 dir2 = Vector3.Normalize(aimG.transform.position - g.transform.position);     //a到b的距离  b-a
 
         g.strategy = new BulletStraitMoveStrategy(dir2, g.gameObject, 10);
 
@@ -65,7 +68,7 @@ public class SkillReleaseManager : StrategySponsor,IViewer
 
 
     }
-    public Ray ray;
+    public Ray ray; //声明一条射线
 
     public RaycastHit hit;
 
@@ -75,10 +78,15 @@ public class SkillReleaseManager : StrategySponsor,IViewer
     public List<GameObject> playerList = new List<GameObject>();
     void ExplosionDamage(Vector3 center, float radius)
     {
+        //   *Collider碰撞器，ExplosionDamage将碰撞到的tag=Player加入List
+
         Collider[] hitColliders = Physics.OverlapSphere(center, radius);
         int i = 0;
 
-        
+       //碰撞到的 hitColliders[i].gameObject.name也可以通过已下输出。  
+      // Physics.OverlapSphere(transform.position, 10000, LayerMask.GetMask("xxx")) 
+      //这个方法第三个参数： 是表示在xxx层中查找
+
         while (i < hitColliders.Length)
         {
             //被扫到的碰撞体的行为，例如：
@@ -119,6 +127,18 @@ public class SkillReleaseManager : StrategySponsor,IViewer
 
 
 	}
+    private List<GameObject> aList = new List<GameObject>();
+
+    public void setLabel (string id,Player _player){
+        
+        GameObject cavas = GameObject.Find("Canvas");
+        GameObject g = GameObject.Instantiate<GameObject>(ResourcesManager.prefabDic[ResName.lables],cavas.transform);
+        Text t = g.GetComponent<Text>();
+        t.text = id;
+        t.transform.gameObject.AddComponent<Fllow>();
+        Fllow f=t.GetComponent<Fllow>();
+        f.setTp(t,_player);
+    }
 
     public void updateViewInfo(ViewInfo info)
     {
@@ -127,9 +147,12 @@ public class SkillReleaseManager : StrategySponsor,IViewer
             case 1:
                 Debug.Log(info.arg1);
 
+                setLabel(info.arg1, info.aimG.transform.GetComponent<Player>());
                 GameObject g =  GameObject.Instantiate(ResourcesManager.prefabDic[ResName.ef2],info.aimG.transform);
                 g.transform.localPosition = new Vector3();
                 break;
         }
+
+        
     }
 }
