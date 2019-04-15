@@ -100,6 +100,67 @@ public class CommandView : MonoBehaviour
                     if (Input.GetKeyDown(keyCode)&& keyCode != KeyCode.Return && keyCode != KeyCode.CapsLock )
                     {
                         //Debug.LogError("Current Key is : " + keyCode.ToString());
+
+
+                        if (Input.GetKeyDown(KeyCode.Alpha1))
+                        {
+                            dynamicStr += "1";
+                            continue;
+                        }
+
+
+                        if (Input.GetKeyDown(KeyCode.Alpha2))
+                        {
+                            dynamicStr += "2";
+                            continue;
+                        }
+                        if (Input.GetKeyDown(KeyCode.Alpha3))
+                        {
+                            dynamicStr += "3";
+                            continue;
+                        }
+                        if (Input.GetKeyDown(KeyCode.Alpha4))
+                        {
+                            dynamicStr += "4";
+                            continue;
+                        }
+                        if (Input.GetKeyDown(KeyCode.Alpha5))
+                        {
+                            dynamicStr += "5";
+                            continue;
+                        }
+                        if (Input.GetKeyDown(KeyCode.Alpha6))
+                        {
+                            dynamicStr += "6";
+                            continue;
+                        }
+                        if (Input.GetKeyDown(KeyCode.Alpha7))
+                        {
+                            dynamicStr += "7";
+                            continue;
+                        }
+                        if (Input.GetKeyDown(KeyCode.Alpha8))
+                        {
+                            dynamicStr += "8";
+                            continue;
+                        }
+                        if (Input.GetKeyDown(KeyCode.Alpha9))
+                        {
+                            dynamicStr += "9";
+                            continue;
+                        }
+                        if (Input.GetKeyDown(KeyCode.Alpha0))
+                        {
+                            dynamicStr += "0";
+                            continue;
+                        }
+
+                        if (Input.GetKeyDown(KeyCode.Tab))
+                        {
+                            dynamicStr += ":";
+                            continue;
+                        }
+
                         if (keyCode == KeyCode.Space)
                         {
                             dynamicStr += " ";

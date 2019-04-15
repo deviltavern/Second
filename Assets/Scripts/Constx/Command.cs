@@ -11,7 +11,8 @@ public class Command {
 
     public const string moveBack =  "MOVE BACK";
 
-    public const string touch = "TOUCH";
 
+    public const string touch = "TOUCH";
+    public const string fireball = "FIREBALL";
 
 }

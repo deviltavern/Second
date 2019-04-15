@@ -30,14 +30,20 @@ public class MoveStrategy : Strategy
     {
 
         // player.transform.position;
-         Debug.Log(command);
+         
 
+        string[] commondArray = command.Split(':');
+
+        if (commondArray.Length > 1)
+        {
+            Debug.Log(commondArray[1]);
+        }
         switch (code)
         {
             case 0:
 
                 //初始化移动位置
-                switch (command)
+                switch (commondArray[0])
                 {
                     case Command.moveLeft:
                         dir -= new Vector3(2, 0, 0);
@@ -57,13 +63,17 @@ public class MoveStrategy : Strategy
 
                        dir -= new Vector3(0, 0, 2);
                         break;
-
+                       
                     case Command.touch:
 
                         SkillReleaseManager.Instance.touch(player);
                         Debug.Log("执行touch事件！");
                         break;
+                    case Command.fireball:
 
+                        SkillReleaseManager.Instance.fireBall(commondArray[1].Trim());
+                        Debug.Log("执行fireball事件！");
+                        break;
                     default:
 
                         break;

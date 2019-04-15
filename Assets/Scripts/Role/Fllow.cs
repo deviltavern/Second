@@ -14,7 +14,7 @@ public class Fllow : MonoBehaviour {
     
 	// Update is called once per frame
 	void Update () {
-        
+        //世界坐标与屏幕坐标的转换
         t.rectTransform.localPosition = Camera.main.WorldToScreenPoint(player.transform.position)+Offset;
 
 	}

@@ -52,7 +52,7 @@ public class SkillReleaseManager : StrategySponsor,IViewer
 
 
     }
-
+   
     public static void shootTouchBullet(GameObject player,GameObject aimG)
     {
 
@@ -75,7 +75,13 @@ public class SkillReleaseManager : StrategySponsor,IViewer
     public GameObject rayOrigin;
 
     public GameObject touchSphere;
-    public List<GameObject> playerList = new List<GameObject>();
+    public  List<GameObject> playerList = new List<GameObject>();
+
+    public static Dictionary<string, GameObject> spPlayer = new Dictionary<string, GameObject>();
+   
+
+
+
     void ExplosionDamage(Vector3 center, float radius)
     {
         //   *Collider碰撞器，ExplosionDamage将碰撞到的tag=Player加入List
@@ -140,6 +146,48 @@ public class SkillReleaseManager : StrategySponsor,IViewer
         f.setTp(t,_player);
     }
 
+
+
+    public static void shootFireball(GameObject player, GameObject aimG)
+    {
+
+
+        FireBall g = FireBall.insBulletItem<FireBall>(ResName.ef1);
+
+        g.transform.position = player.transform.position;
+        Vector3 dir2 = Vector3.Normalize(aimG.transform.position - g.transform.position);     //a到b的距离  b-a
+
+        g.strategy = new BulletStraitMoveStrategy(dir2, g.gameObject, 10);
+
+
+
+
+    }
+    
+
+    public void fireBall(string playerID ) {
+        GameObject g = spPlayer[playerID];
+       
+            
+            g.GetComponent<MeshRenderer>().material.color = Color.red;
+            
+            shootFireball(LocalPlayer.player.gameObject, g);
+
+        
+
+        }
+
+    public void save2Dic(string key, GameObject g)
+    {
+        
+        if (spPlayer.ContainsKey(key) == false)
+        {
+            spPlayer.Add(key, g);
+
+        }
+    }
+
+
     public void updateViewInfo(ViewInfo info)
     {
         switch (info.code)
@@ -150,6 +198,7 @@ public class SkillReleaseManager : StrategySponsor,IViewer
                 setLabel(info.arg1, info.aimG.transform.GetComponent<Player>());
                 GameObject g =  GameObject.Instantiate(ResourcesManager.prefabDic[ResName.ef2],info.aimG.transform);
                 g.transform.localPosition = new Vector3();
+                save2Dic(info.arg1, info.aimG);
                 break;
         }
 
