@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class MoveStrategy : Strategy
-{
+{//移动策略
 
     public MoveStrategy(GameObject aimG, string _command,StrategySponsor _sponsor)
     {
@@ -71,7 +71,7 @@ public class MoveStrategy : Strategy
                         break;
                     case Command.fireball:
 
-                        SkillReleaseManager.Instance.fireBall(commondArray[1].Trim());
+                        SkillReleaseManager.shootFireball(LocalPlayer.player.gameObject, commondArray[1].Trim());
                         Debug.Log("执行fireball事件！");
                         break;
                     default:

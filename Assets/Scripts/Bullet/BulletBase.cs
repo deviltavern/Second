@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletBase : MonoBehaviour,IOBViewer {
+public abstract class BulletBase : MonoBehaviour,IOBViewer {
 
-    public Strategy strategy { get; set; }
+    public Strategy strategy { get; set; }//构造函数设置具体策略
     private List<IViewer> viewList = new List<IViewer>();//观察者列表
     public string resID { get; set; }
 
@@ -43,7 +43,7 @@ public class BulletBase : MonoBehaviour,IOBViewer {
 
     }
     
-    public virtual void Update()
+    public virtual void Update()            //调用策略
     {
 
         if (strategy != null)
@@ -53,19 +53,16 @@ public class BulletBase : MonoBehaviour,IOBViewer {
 
     }
 
-    public virtual void OnTriggerEnter(Collider co)
+
+    public abstract void onTouchPlayer(Collider co);
+    public virtual void OnTriggerEnter(Collider co)  //检测到碰撞
     {
 
         switch (co.tag)
         {
             case "Player":
-                ViewInfo info = new ViewInfo();
-                info.arg1 = co.GetComponent<Player>().ID;
-                info.aimG = co.gameObject;
-                info.code = 1;
-                broadCast(info);
-                Destroy(this.gameObject);
-
+              
+                onTouchPlayer(co);
 
                 break;
 

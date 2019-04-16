@@ -11,4 +11,12 @@ public class Player : Role {
 
         this.ID = Random.Range(0, 1000)+"";
     }
+
+    void Update()
+    {
+        if (strategy != null)
+        {
+            strategy.doSomething();
+        }
+    }
 }

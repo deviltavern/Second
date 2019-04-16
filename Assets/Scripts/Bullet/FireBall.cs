@@ -5,15 +5,14 @@ using UnityEngine;
 public class FireBall : BulletBase {
 
 
-    public override void OnTriggerEnter(Collider co)
+    public override void onTouchPlayer(Collider co)
     {
 
-        Debug.Log("00000000000000000000000000000000");
-        base.OnTriggerEnter(co);
-
+        Debug.Log("发生");
+        Player player = co.gameObject.GetComponent<Player>();
+        ColorStrategy strategy = new ColorStrategy(co.gameObject, 0.6f, player);
 
     }
-
 
 
 }

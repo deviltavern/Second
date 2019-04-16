@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Role : MonoBehaviour {
+public abstract class Role : StrategySponsor {
 
     public static Role Player;
 

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BulletStraitMoveStrategy : Strategy
 {
-
+    //子弹移动策略
     private Vector3 dir;
     private GameObject bullet;
     private float speed;
@@ -14,7 +14,7 @@ public class BulletStraitMoveStrategy : Strategy
         this.bullet = _bullet;
         this.speed = _sped;
     }
-    public override void doSomething()
+    public override void doSomething()//具体决策的运算法则doSomething()
     {
 
         bullet.transform.position += dir * Time.deltaTime * speed ;

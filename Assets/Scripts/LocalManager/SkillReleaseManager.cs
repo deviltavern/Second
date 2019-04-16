@@ -105,6 +105,9 @@ public class SkillReleaseManager : StrategySponsor,IViewer
             i++;
         }
     }
+    float fameTime= 0;
+ 
+  
 
 	void Update () {
 
@@ -135,49 +138,48 @@ public class SkillReleaseManager : StrategySponsor,IViewer
 	}
     private List<GameObject> aList = new List<GameObject>();
 
-    public void setLabel (string id,Player _player){
-        
+    public void setLabel(string id, Player _player)//获得Label，传参 ：游戏玩家的id，与玩家player
+    {
+        //1：生成Label（资源，父节点)
         GameObject cavas = GameObject.Find("Canvas");
         GameObject g = GameObject.Instantiate<GameObject>(ResourcesManager.prefabDic[ResName.lables],cavas.transform);
-        Text t = g.GetComponent<Text>();
+        Text t = g.GetComponent<Text>();//2.获取label的text组件，将id赋值给text
         t.text = id;
-        t.transform.gameObject.AddComponent<Fllow>();
+        t.transform.gameObject.AddComponent<Fllow>();//添加Fllow的脚本
         Fllow f=t.GetComponent<Fllow>();
         f.setTp(t,_player);
     }
 
+  
 
-
-    public static void shootFireball(GameObject player, GameObject aimG)
+    public static void shootFireball(GameObject player,string playerID )
     {
 
-
+        GameObject aimG = spPlayer[playerID];//在字典spPlayer中找到传入的playerID，
         FireBall g = FireBall.insBulletItem<FireBall>(ResName.ef1);
 
         g.transform.position = player.transform.position;
         Vector3 dir2 = Vector3.Normalize(aimG.transform.position - g.transform.position);     //a到b的距离  b-a
 
         g.strategy = new BulletStraitMoveStrategy(dir2, g.gameObject, 10);
-
-
+    //    aimG.GetComponent<MeshRenderer>().material.color = Color.red;
 
 
     }
-    
 
-    public void fireBall(string playerID ) {
-        GameObject g = spPlayer[playerID];
-       
-            
-            g.GetComponent<MeshRenderer>().material.color = Color.red;
-            
-            shootFireball(LocalPlayer.player.gameObject, g);
 
+
+
+
+    //public void fireBall(string playerID ) {
+    //    GameObject g = spPlayer[playerID];//在字典spPlayer中找到传入的playerID， 
+    //        shootFireball(LocalPlayer.player.gameObject, g);
+    //        g.GetComponent<MeshRenderer>().material.color = Color.red;
         
 
-        }
+    //    }
 
-    public void save2Dic(string key, GameObject g)
+    public void save2Dic(string key, GameObject g)//当调用相同的键值，不允许第二次操作
     {
         
         if (spPlayer.ContainsKey(key) == false)
